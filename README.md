@@ -1,111 +1,48 @@
-📌 Project Overview
+## 📦 Inventory Optimization & Demand Forecasting  
+Using Google Trends Data
 
-This project demonstrates how demand forecasting can be translated into cost-optimised inventory decisions under real-world constraints.
+## 📌 Project Overview
+This project demonstrates how demand forecasting can be translated into **cost-optimised inventory decisions** under real-world operational constraints. Using Google Trends data as a demand signal, the analysis focuses on converting forecasts into actionable ordering strategies that balance fixed ordering costs, inventory holding costs, and capacity limits.
 
-Using Google Trends data as a demand signal, I built a demand forecasting model and developed an inventory ordering strategy that balances fixed ordering costs and holding costs, with the objective of minimising total operational cost while meeting customer demand.
+## 🧠 Business Problem
+A laptop retailer faces fluctuating demand driven by consumer interest. The business incurs:
+- A **fixed ordering cost** of $2,000 per order  
+- A **holding cost** of $1 per unit per month  
+- A maximum order capacity of **6,000 units per month**
 
-This project reflects a typical business analytics / operations analyst workflow:
+The objective is to determine an ordering strategy for the next four months that satisfies demand while **minimising total operational cost**.
 
-Data → Forecast → Decision → Cost impact
+## 📊 Data Source
+Demand signals are captured using **Google Trends** search interest for the keyword *“laptop”*. Monthly trend data is collected using the `pytrends` library and used as a proxy for consumer demand.
 
-🧠 Business Problem
+## 🔍 Analytical Approach
 
-A laptop retailer faces the following challenge:
+### 1️⃣ Demand Forecasting
+Demand is estimated using the following relationship: Demand = 100 + 20 × Google Trends Index
+Historical trend data is cleaned, visualised, and projected forward to generate demand forecasts for the planning horizon.
 
-Demand fluctuates with online search interest
+### 2️⃣ Inventory Decision Logic
+The ordering strategy considers forecasted demand, ordering costs, holding costs, and capacity constraints. The model evaluates the trade-off between placing frequent small orders versus fewer larger orders while holding inventory to meet future demand.
 
-Ordering inventory incurs:
-
-Fixed ordering cost: $2,000 per order
-
-Holding cost: $1 per unit per month
-
-Monthly order capacity is capped at 6,000 units
-
-Objective
-
-Determine an optimal ordering strategy for the next 4 months that satisfies demand while minimising total cost.
-
-📊 Data Source
-
-Google Trends: Search interest for the keyword “laptop”
-
-Time granularity: Monthly
-
-Tooling: pytrends
-
-Google Trends is used as a leading indicator of consumer demand, a common technique in retail and demand sensing.
-
-🔍 Analytical Approach
-1️⃣ Demand Forecasting
-
-Demand is modelled using the following relationship:
-
-Demand = 100 + 20 × Google Trends Index
-
-
-This reflects the assumption that online search interest has a linear relationship with purchase demand.
-
-Steps:
-
-Collected historical Google Trends data
-
-Cleaned and visualised the time series
-
-Generated demand forecasts for the next 4 months
-
-2️⃣ Inventory Decision Logic
-
-The ordering strategy considers:
-
-Forecasted monthly demand
-
-Fixed cost per order
-
-Inventory holding cost
-
-Order capacity constraint
-
-Rather than ordering every month, the model evaluates when it is more cost-effective to:
-
-Place fewer large orders (saving fixed costs)
-
-Hold inventory to cover future demand
-
-3️⃣ Cost Evaluation
-
+### 3️⃣ Cost Evaluation
 Total cost is decomposed into:
+- **Ordering Cost**: number of orders × $2,000  
+- **Holding Cost**: inventory held × $1 × time  
 
-Ordering Cost = Number of orders × $2,000
+This allows for clear comparison of alternative ordering strategies and their cost implications.
 
-Holding Cost = Inventory held × $1 × months
+## 📈 Key Insights
+- High fixed ordering costs incentivise batch ordering.
+- Holding limited excess inventory can be more cost-effective than frequent reordering.
+- External demand signals such as search trends can improve inventory planning decisions.
+- Cost-based reasoning leads to more practical and scalable operational strategies.
 
-This enables clear trade-off analysis between:
+## 🛠 Tools & Technologies
+- Python  
+- pandas, numpy  
+- matplotlib  
+- pytrends  
+- Google Colab 
 
-Order frequency
 
-Inventory levels
 
-Cost efficiency
-
-📈 Key Insights
-
-High fixed ordering costs incentivise batch ordering
-
-Ordering too frequently significantly increases total cost
-
-Holding limited excess inventory is often cheaper than placing additional orders
-
-Demand sensing using external data (Google Trends) can meaningfully improve planning decisions
-
-🛠 Tools & Technologies
-
-Python
-
-pandas, numpy
-
-matplotlib
-
-pytrends
-
-Jupyter Notebook
